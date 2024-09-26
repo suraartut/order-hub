@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# OrderHub
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+OrderHub, kullanıcıların ve siparişlerin yönetimini kolaylaştırmak için geliştirilmiş bir web uygulamasıdır. Bu uygulama, kullanıcı giriş işlemlerini, kullanıcı ve sipariş listelerini ve kullanıcı bilgilerini düzenleme işlevselliğini sunmaktadır.
 
-## Available Scripts
+## Özellikler
 
-In the project directory, you can run:
+- **Kullanıcı Girişi:** Kullanıcılar, güvenli bir giriş ekranı ile sisteme giriş yapabilir.
+- **Kullanıcı ve Sipariş Listeleme:** İki ayrı tabloda kullanıcılar ve onların siparişleri listelenir. Seçili kullanıcıya ait siparişler otomatik olarak güncellenir.
+- **Yeni Kayıt ve Düzenleme:** Kullanıcı bilgilerini düzenlemek veya yeni bir kullanıcı eklemek için ayrı bir sayfa mevcuttur.
+- **Sipariş Yönetimi:** Kullanıcıya ait siparişler tablo halinde görüntülenir ve kullanıcı, siparişleri doğrudan bu tabloda düzenleyebilir veya silebilir.
 
-### `npm start`
+## Teknolojiler
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React.js:** Kullanıcı arayüzü için.
+- **DevExpress:** DataGrid ve Form bileşenleri için.
+- **Tailwind CSS:** Stil ve düzenleme için.
+- **Axios:** API ile iletişim için.
+- **React Router:** Sayfa yönlendirmesi için.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Kurulum
 
-### `npm test`
+1. **Proje Kopyalama:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   git clone <repository-url>
+   cd orderhub
 
-### `npm run build`
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Bağımlılıkları Yükleme:**
+   npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. **Tailwind CSS'i Kurma:**
+   npm install -D tailwindcss postcss autoprefixer
+   npx tailwindcss init -p
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. **Geliştirme Sunucusunu Başlatma:**
+   npm start
+   - Uygulama, varsayılan olarak http://localhost:3000 adresinde çalışacaktır.
 
-### `npm run eject`
+## Kullanım
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Uygulamayı başlattıktan sonra, kullanıcı girişi yaparak kullanıcı ve sipariş listesini görüntüleyebilirsiniz.
+2. Kullanıcı bilgilerini düzenlemek veya yeni bir kullanıcı eklemek için düzenleme sayfasına yönlendirilirsiniz.
+3. Siparişleri görüntülemek ve düzenlemek için ilgili tabloları kullanabilirsiniz.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Katkıda Bulunma
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Bu projeye katkıda bulunmak isterseniz, lütfen bir fork oluşturun ve pull request gönderin.
