@@ -6,7 +6,7 @@ const api = axios.create({
 
 export const login = (credentials) => api.post("/auth/login", credentials);
 export const getUsers = () => api.get("/users");
-export const getUserOrders = (userId) => api.get(`/users/${userId}/orders`);
+export const getUserOrders = (userId) => api.get(`/users/${userId}/carts`);
 export const updateUser = (userId, data) => api.put(`/users/${userId}`, data);
 export const deleteUser = (userId) => api.delete(`/users/${userId}`);
 export const deleteOrder = (orderId) => api.delete(`/orders/${orderId}`);

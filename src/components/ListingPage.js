@@ -1,8 +1,14 @@
+// ListingPage.js
+
 import React, { useState, useEffect } from "react";
-import { getUsers } from "../services/api";
+import { getUsers, getUserOrders } from "../services/api"; // getUserOrders'ı ekleyin
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPen,
+  faUser,
+  faCartShopping,
+} from "@fortawesome/free-solid-svg-icons";
 
 const ListingPage = () => {
   const [users, setUsers] = useState([]);
@@ -10,13 +16,26 @@ const ListingPage = () => {
   const [usersPerPage] = useState(10);
   const [sortDirection, setSortDirection] = useState("asc");
   const [sortKey, setSortKey] = useState("");
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     // Kullanıcıları al
     getUsers().then((response) => {
       setUsers(response.data.users);
+      if (response.data.users.length > 0) {
+        setSelectedUser(response.data.users[0]);
+      }
     });
   }, []);
+
+  useEffect(() => {
+    if (selectedUser) {
+      getUserOrders(selectedUser.id).then((response) => {
+        setOrders(response.data.orders);
+      });
+    }
+  }, [selectedUser]);
 
   // Mevcut sayfada gösterilecek kullanıcıları hesaplama
   const indexOfLastUser = currentPage * usersPerPage;
@@ -44,8 +63,14 @@ const ListingPage = () => {
     setUsers(sortedUsers);
   };
 
+  const handleUserSelect = (user) => {
+    setSelectedUser(user);
+    setCurrentPage(1);
+  };
+
   return (
     <div className="container mx-auto p-4">
+      {/* Kullanıcı Tablosu */}
       <h2 className="text-lg font-semibold mb-4">
         <FontAwesomeIcon icon={faUser} /> User List
       </h2>
@@ -101,7 +126,10 @@ const ListingPage = () => {
         {currentUsers.map((user) => (
           <div
             key={user.id}
-            className="grid grid-cols-12 gap-4 py-2 hover:bg-gray-100 border-b"
+            className={`grid grid-cols-12 gap-4 py-2 hover:bg-gray-100 border-b ${
+              selectedUser && selectedUser.id === user.id ? "bg-gray-200" : ""
+            }`}
+            onClick={() => handleUserSelect(user)}
           >
             <div className="flex items-center col-span-4">
               <img
@@ -127,6 +155,7 @@ const ListingPage = () => {
         ))}
       </div>
 
+      {/* Sayfalama Navigasyonu */}
       <nav
         className="flex items-center flex-col md:flex-row justify-between pt-4"
         aria-label="Table navigation"
@@ -180,6 +209,41 @@ const ListingPage = () => {
           </li>
         </ul>
       </nav>
+
+      {/* Siparişler Tablosu */}
+      <h2 className="text-lg font-semibold mt-8 mb-4">
+        <FontAwesomeIcon icon={faCartShopping} /> Orders for{" "}
+        {selectedUser
+          ? `${selectedUser.firstName} ${selectedUser.lastName}`
+          : "Select a User"}
+      </h2>
+      <div className="grid grid-cols-12 gap-4 bg-white border border-gray-200 p-4">
+        <div className="font-semibold col-span-4">Title</div>
+        <div className="font-semibold col-span-1">Price</div>
+        <div className="font-semibold col-span-2">Quantity</div>
+        <div className="font-semibold col-span-1">Total</div>
+        <div className="font-semibold col-span-2">Discount</div>
+        <div className="font-semibold col-span-2">Discounted Total</div>
+      </div>
+      <div className="border-t border-gray-200">
+        {Array.isArray(orders) && orders.length > 0 ? ( // orders dizisinin bir dizi olup olmadığını ve uzunluğunu kontrol et
+          orders.map((order) => (
+            <div
+              key={order.id}
+              className="grid grid-cols-12 gap-4 py-2 border-b"
+            >
+              <div className="col-span-4">{order.title}</div>
+              <div className="col-span-1">{order.price}</div>
+              <div className="col-span-2">{order.quantity}</div>
+              <div className="col-span-1">{order.total}</div>
+              <div className="col-span-2">{order.discountPercantage}</div>
+              <div className="col-span-2">{order.discountedTotal}</div>
+            </div>
+          ))
+        ) : (
+          <div className="col-span-12 text-center">No orders available</div> // Eğer dizi boşsa gösterilecek mesaj
+        )}
+      </div>
     </div>
   );
 };
